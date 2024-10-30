@@ -21,8 +21,8 @@ from sklearn.base import BaseEstimator , TransformerMixin
 
 @dataclass
 class DataTransformationConfig():
-    input_preprocessor_path:str = os.path.join("artifacts" , "input_preprocessor.pkl")
-    output_preprocessor_path:str = os.path.join("artifacts" , "output_preprocessor.pkl")
+    input_preprocessor_path:str = os.path.join("artifacts" , "input_preprocessor.pkl") # pipelines
+    output_encoder_path:str = os.path.join("artifacts" , "output_encoder.pkl") # encoder
 
 class RestoreNameTransformer(BaseEstimator , TransformerMixin):
     def __init__(self , features_names):
@@ -74,11 +74,9 @@ class DataTransformation():
         ])
 
         #label preprocessor
-        output_preprocessor = ColumnTransformer(
-                            [ ("preprocesslabel" , OrdinalEncoder(categories=self.label_categories)) , [self.label]  ]
-        ) 
+        output_encoder =  OrdinalEncoder(categories=self.label_categories)
 
-        return input_preprocessor , output_preprocessor
+        return (input_preprocessor , output_encoder)
     
     def initiate_data_transformation(self ,train_df: pd.DataFrame ,test_df: pd.DataFrame ):
         logging.info("enter to initiate_data_transformation function")
@@ -88,21 +86,21 @@ class DataTransformation():
             test_df.loc[test_df[self.label] =="vgood" , self.label] = "good"
 
             logging.info("creating preprocessor object")
-            input_preprocessor , output_preprocessor = self.get_preprocessor()
+            input_preprocessor , output_encoder = self.get_preprocessor()
             
             train_input_raw = train_df.drop(columns=[self.label])
-            train_label_raw = train_df[self.label]
+            train_label_raw = train_df[[self.label]]
 
             test_input_raw = test_df.drop(columns=[self.label])
-            test_label_raw = test_df[self.label]
+            test_label_raw = test_df[[self.label]]
 
             logging.info("applying preprocessing to the dataset")
 
             train_input_array = input_preprocessor.fit_transform(train_input_raw)
             test_input_array = input_preprocessor.transform(test_input_raw)
-
-            train_label_array = output_preprocessor.fit_transform(train_label_raw)
-            test_label_array =  output_preprocessor.transform(test_label_raw)
+            
+            train_label_array = output_encoder.fit_transform(train_label_raw)
+            test_label_array =  output_encoder.transform(test_label_raw)
 
             logging.info("joining features and labels columns")
 
@@ -112,7 +110,7 @@ class DataTransformation():
             logging.info("saving input and labels preprocessor")
 
             save_object(file_path= self.dataconfig.input_preprocessor_path ,  obj=input_preprocessor)
-            save_object(file_path= self.dataconfig.output_preprocessor_path , obj= output_preprocessor)
+            save_object(file_path= self.dataconfig.output_encoder_path , obj= output_encoder)
 
             return ( train_array , test_array )
 

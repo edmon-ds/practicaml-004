@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Predicción</title>
+</head>
+<body>
+    <h2>Formulario de Predicción</h2>
+    <form action="{{ url_for('predict_datapoint') }}" method="POST">
+        <!-- Campo Buying -->
+        <label for="buying">Buying:</label>
+        <select id="buying" name="buying" required>
+            <option value="vhigh">Very High</option>
+            <option value="high">High</option>
+            <option value="med">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <br><br>
+
+        <!-- Campo Maint -->
+        <label for="maint">Maintenance:</label>
+        <select id="maint" name="maint" required>
+            <option value="vhigh">Very High</option>
+            <option value="high">High</option>
+            <option value="med">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <br><br>
+
+        <!-- Campo Doors -->
+        <label for="doors">Doors:</label>
+        <select id="doors" name="doors" required>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5more">5 or more</option>
+        </select>
+        <br><br>
+
+        <!-- Campo Persons -->
+        <label for="persons">Persons:</label>
+        <select id="persons" name="persons" required>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="more">More</option>
+        </select>
+        <br><br>
+
+        <!-- Campo Lug Boot -->
+        <label for="lug_boot">Lug Boot Size:</label>
+        <select id="lug_boot" name="lug_boot" required>
+            <option value="small">Small</option>
+            <option value="med">Medium</option>
+            <option value="big">Big</option>
+        </select>
+        <br><br>
+
+        <!-- Campo Safety -->
+        <label for="safety">Safety:</label>
+        <select id="safety" name="safety" required>
+            <option value="low">Low</option>
+            <option value="med">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <br><br>
+
+        <!-- Botón de Envío -->
+        <button type="submit">Submit</button>
+    </form>
+    <p>the prediction results is: {{results}}</p>
+</body>
+</html>
