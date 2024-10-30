@@ -1,0 +1,9 @@
+scikit-learn
+pandas
+numpy
+seaborn
+pyodbc
+sqlalchemy==2.0.0
+xgboost
+dill
+Flask

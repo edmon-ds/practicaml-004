@@ -1,0 +1,7 @@
+[2024-10-29 16:15:38,028  31  root INFO - enter to the data ingestion method ]
+[2024-10-29 16:15:38,048  36  root INFO - reading database as dataframe ]
+[2024-10-29 16:15:38,239  40  root INFO - saving top 5 records ]
+[2024-10-29 16:15:38,242  44  root INFO - dividing the dataset ]
+[2024-10-29 16:15:38,243  67  root INFO - enter to initiate_data_transformation function ]
+[2024-10-29 16:15:38,243  69  root INFO - joining good and vgood labels ]
+[2024-10-29 16:15:38,243  73  root INFO - creating preprocessor object ]

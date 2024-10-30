@@ -1,0 +1,4 @@
+[2024-10-29 15:19:55,827  31  root INFO - enter to the data ingestion method ]
+[2024-10-29 15:19:56,031  36  root INFO - reading database as dataframe ]
+[2024-10-29 15:19:56,242  40  root INFO - saving top 5 records ]
+[2024-10-29 15:19:56,242  44  root INFO - dividing the dataset ]
